@@ -11,13 +11,17 @@ class Board
   def generate_tiles
     @board.each_with_index do |row, row_idx|
       row.each_index do |col_idx|
-        @board[row_idx][col_idx] = Tile.new([row_idx, col_idx])
+        @board[row_idx][col_idx] = Tile.new([row_idx, col_idx],@board)
       end
     end
     @board
   end
 
 
+
+
 end
 
-p new = Board.new.board
+new = Board.new
+
+p new.board[0][0].neighbors.count
