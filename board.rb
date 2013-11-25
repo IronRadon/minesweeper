@@ -24,4 +24,6 @@ end
 
 new = Board.new
 
-p new.board[0][0].neighbors.count
+p new.board[0][1].bombed = true
+
+p new.board[0][0].neighbor_bomb_count

@@ -1,5 +1,5 @@
 class Tile
-  attr_accessor :position, :bombed, :flagged, :revealed, :board
+  attr_accessor :position, :bombed, :flagged, :revealed, :board, :bomb_value
 
   def initialize(position, board)
     @revealed = false
@@ -7,6 +7,7 @@ class Tile
     @flagged = false
     @position = position
     @board = board
+    @bomb_value = 0
   end
 
 
@@ -25,6 +26,9 @@ class Tile
   end
 
   def neighbor_bomb_count
-
+    neighbors.each do |tile|
+      @bomb_value += 1 if tile.bombed
+    end
+    @bomb_value
   end
 end
