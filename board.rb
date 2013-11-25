@@ -17,13 +17,22 @@ class Board
     @board
   end
 
-
-
+  def display
+    current_board = ""
+    @board.map do |row|
+      row.map do |tile|
+        current_board << tile.reveal
+      end
+      current_board << "\n"
+    end
+    puts current_board
+  end
 
 end
 
-new = Board.new
+new_board = Board.new
+new_board.board[0][1].revealed = true
+new_board.board[0][1].bombed = true
+new_board.display
 
-p new.board[0][1].bombed = true
-
-p new.board[0][0].neighbor_bomb_count
+# p new.board[0][0].neighbor_bomb_count

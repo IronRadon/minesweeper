@@ -1,3 +1,4 @@
+
 class Game
   def initialize
     @board = Board.new
@@ -12,7 +13,6 @@ class Game
     tile = gets.chomp
     puts "Reveal or Flag. R/F ?"
     action = gets.chomp
-
-
+  end
 
 end

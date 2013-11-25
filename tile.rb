@@ -12,8 +12,7 @@ class Tile
 
 
   def neighbors
-    neighbors = [[1,0], [-1,0], [0,1], [0,-1], [-1,-1], [-1,1], [1,1],
-                [1,-1]]
+    neighbors = [[1,0], [-1,0], [0,1], [0,-1], [-1,-1], [-1,1], [1,1], [1,-1]]
     neighbor_tiles = Array.new
 
     neighbors.each do |pair|
@@ -31,4 +30,21 @@ class Tile
     end
     @bomb_value
   end
+
+  def reveal
+    unless @revealed
+      "*"
+    else
+      if @bombed
+        "B"
+      elsif @flagged
+        "F"
+      elsif @bomb_value > 0
+        @bombvalue.to_s
+      end
+    end
+  end
+
+
+
 end
