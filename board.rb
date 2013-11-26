@@ -30,13 +30,13 @@ class Board
 
 end
 
-new_board = Board.new
-new_board.board[0][5].bombed = true
-new_board.board[1][2].bombed = true
-new_board.display
-
-new_board.board[4][4].reveal
-new_board.display
-p new_board.board[1][1].bomb_value
+# new_board = Board.new
+# new_board.board[0][5].bombed = true
+# new_board.board[1][2].bombed = true
+# new_board.display
+#
+# new_board.board[4][4].reveal
+# new_board.display
+# p new_board.board[1][1].bomb_value
 
 # p new.board[0][0].neighbor_bomb_count

@@ -1,11 +1,14 @@
+require './board.rb'
 
 class Game
+  attr_accessor :board
+
   def initialize
     @board = Board.new
   end
 
   def play
-    #call move method
+
   end
 
   def move
@@ -20,12 +23,36 @@ class Game
 
 
     if action.upcase == "F"
-      #current_tile.revealed = true
+      current_tile.revealed = true
       current_tile.flagged = true
     elsif action.upcase == "R"
-      current_tile.bombed
+      current_tile.reveal
     end
+
   end
 
+  def won?
+    @board.board.each do |row|
+      row.each do |tile|
+        if tile.render != "*"
+          if tile.bombed && tile.flagged
+            return true
+          end
+        end
+      end
+    end
+    false
+  end
 
 end
+
+new_game = Game.new
+new_game.board.board[0][5].bombed = true
+new_game.board.display
+
+new_game.board.board[4][4].reveal
+new_game.board.board[0][5].flagged = true
+new_game.board.board[0][5].revealed = true
+new_game.board.display
+p new_game.won?
+
