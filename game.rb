@@ -31,23 +31,6 @@ class Game
 
   end
 
-  def won?
-    @board.grid.each do |row|
-      row.each do |tile|
-        if tile.render != "*"
-          if tile.bombed && tile.flagged
-            return true
-          end
-        end
-      end
-    end
-    false
-  end
-
-  def lost?(tile)
-    tile.revealed && tile.bombed
-  end
-
   def game_over?
 
   end
