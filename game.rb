@@ -32,7 +32,7 @@ class Game
   end
 
   def won?
-    @board.board.each do |row|
+    @board.grid.each do |row|
       row.each do |tile|
         if tile.render != "*"
           if tile.bombed && tile.flagged
@@ -44,15 +44,22 @@ class Game
     false
   end
 
+  def lost?(tile)
+    tile.revealed && tile.bombed
+  end
+
+  def game_over?
+
+  end
 end
 
 new_game = Game.new
-new_game.board.board[0][5].bombed = true
+new_game.board.grid[0][5].bombed = true
 new_game.board.display
 
-new_game.board.board[4][4].reveal
-new_game.board.board[0][5].flagged = true
-new_game.board.board[0][5].revealed = true
+new_game.board.grid[4][4].reveal
+new_game.board.grid[0][5].flagged = true
+new_game.board.grid[0][5].revealed = true
 new_game.board.display
 p new_game.won?
 

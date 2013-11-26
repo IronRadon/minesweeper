@@ -1,5 +1,5 @@
 class Tile
-  attr_accessor :position, :bombed, :flagged, :revealed, :board, :bomb_value
+  attr_accessor :position, :bombed, :flagged, :revealed, :board
 
   def initialize(position, board)
     @revealed = false
@@ -7,50 +7,58 @@ class Tile
     @flagged = false
     @position = position
     @board = board
-    @bomb_value = 0
   end
+
+  # NEIGHBORS = [
+  #   [ 1,  0],
+  #   [-1,  0],
+  #   [ 0,  1],
+  #   [ 0, -1],
+  #   [-1, -1],
+  #   [-1,  1],
+  #   [ 1,  1],
+  #   [ 1,-1]
+  # ]
 
 
   def neighbors
     neighbors = [[1,0], [-1,0], [0,1], [0,-1], [-1,-1], [-1,1], [1,1], [1,-1]]
-    neighbor_tiles = Array.new
+    neighbor_tiles = []
 
     neighbors.each do |pair|
       potential = [pair[0] + @position[0], pair[1] + @position[1]]
       if potential.min >= 0 && potential.max < 9
-        neighbor_tiles << @board[potential[0]][potential[1]]
+        neighbor_tiles << @board.grid[potential[0]][potential[1]]
       end
     end
-  neighbor_tiles
+    neighbor_tiles
   end
 
   def neighbor_bomb_count
+    bomb_value = 0
     neighbors.each do |tile|
-      @bomb_value += 1 if tile.bombed
+      bomb_value += 1 if tile.bombed
     end
-    @bomb_value
+    bomb_value
   end
 
   def render
-    unless @revealed
+    if !@revealed
       "*"
+    elsif @bombed
+      "B"
+    elsif @flagged
+      "F"
+    elsif neighbor_bomb_count > 0
+      neighbor_bomb_count.to_s
     else
-      if @bombed
-        "B"
-      elsif @flagged
-        "F"
-      elsif @bomb_value > 0
-        @bomb_value.to_s
-      else
-        "_"
-      end
+      "_"
     end
   end
 
   def reveal
-    neighbor_bomb_count
     @revealed = true
-    if @bomb_value == 0
+    if neighbor_bomb_count == 0
       neighbors.each do |neighbor|
         unless neighbor.revealed
           neighbor.reveal

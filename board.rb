@@ -1,25 +1,25 @@
 require './tile.rb'
 
 class Board
-  attr_accessor :board
+  attr_accessor :grid
 
   def initialize
-    @board = Array.new(9) { Array.new(9) }
+    @grid = Array.new(9) { Array.new(9) }
     generate_tiles
   end
 
   def generate_tiles
-    @board.each_with_index do |row, row_idx|
+    @grid.each_with_index do |row, row_idx|
       row.each_index do |col_idx|
-        @board[row_idx][col_idx] = Tile.new([row_idx, col_idx],@board)
+        @grid[row_idx][col_idx] = Tile.new([row_idx, col_idx], self)
       end
     end
-    @board
+    @grid
   end
 
   def display
     current_board = ""
-    @board.map do |row|
+    @grid.map do |row|
       row.map do |tile|
         current_board << tile.render
       end
