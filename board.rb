@@ -21,7 +21,7 @@ class Board
     current_board = ""
     @board.map do |row|
       row.map do |tile|
-        current_board << tile.reveal
+        current_board << tile.render
       end
       current_board << "\n"
     end
@@ -31,8 +31,12 @@ class Board
 end
 
 new_board = Board.new
-new_board.board[0][1].revealed = true
-new_board.board[0][1].bombed = true
+new_board.board[0][5].bombed = true
+new_board.board[1][2].bombed = true
 new_board.display
+
+new_board.board[4][4].reveal
+new_board.display
+p new_board.board[1][1].bomb_value
 
 # p new.board[0][0].neighbor_bomb_count

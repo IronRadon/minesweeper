@@ -31,7 +31,7 @@ class Tile
     @bomb_value
   end
 
-  def reveal
+  def render
     unless @revealed
       "*"
     else
@@ -40,7 +40,21 @@ class Tile
       elsif @flagged
         "F"
       elsif @bomb_value > 0
-        @bombvalue.to_s
+        @bomb_value.to_s
+      else
+        "_"
+      end
+    end
+  end
+
+  def reveal
+    neighbor_bomb_count
+    @revealed = true
+    if @bomb_value == 0
+      neighbors.each do |neighbor|
+        unless neighbor.revealed
+          neighbor.reveal
+        end
       end
     end
   end
